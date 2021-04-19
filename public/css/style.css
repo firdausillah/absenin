@@ -1,0 +1,12 @@
+body, html {
+  height: 100%;
+}
+
+.bg-login{
+    background-image: url(https://trsaero.com/allfastinc/wp-content/uploads/2017/12/bg-blue-orangeslash-1400x600.png);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100%;
+    background-attachment: fixed;
+}
