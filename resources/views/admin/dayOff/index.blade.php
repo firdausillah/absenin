@@ -1,6 +1,6 @@
 @extends('layouts.adminapp')
 
-@section('title', 'Kelas')
+@section('title', 'Daftar Hari Libur')
 
 @section('content')
 <!-- Content -->

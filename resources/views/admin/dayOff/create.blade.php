@@ -4,7 +4,7 @@
     <!-- Custom styles for this page -->
 @endpush
 
-@section('title', 'Buat Kelas')
+@section('title', 'Buat Daftar Hari Libur')
 
 @section('content')
 <!-- Content -->

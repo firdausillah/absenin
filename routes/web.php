@@ -1,8 +1,7 @@
 <?php
 
 use App\Http\Controllers\{AuthController, DashboardController, HomeController};
-use App\Http\Controllers\Admin\{Day_OffController, GradeController, HourController};
-use App\Models\Admin\Hour;
+use App\Http\Controllers\Admin\{Day_OffController, GradeController, HourController, ScheduleController};
 use Illuminate\Support\Facades\Route;
 
 Route::get('', AuthController::class);
@@ -49,6 +48,12 @@ Route::group(['middleware' => 'userrole:admin', 'prefix' => 'admin'], function (
         Route::get('edit/{day_off:id}', [Day_OffController::class, 'edit'])->name('admin.dayOff.edit');
         Route::put('edit/{day_off:id}', [Day_OffController::class, 'update']);
         Route::get('delete/{day_off:id}', [Day_OffController::class, 'destroy'])->name('admin.dayOff.delete');
+    });
+
+    // jadwal pelajaran
+    Route::group(['prefix' => 'jadwal-pelajaran'], function(){
+        Route::get('', ScheduleController::class)->name('admin.schedule');
+        Route::put('update/{schedule:id}', [ScheduleController::class, 'update'])->name('admin.schedule.update');
     });
 });
 
