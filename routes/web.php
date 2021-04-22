@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\{AuthController, DashboardController, HomeController};
-use App\Http\Controllers\Admin\{Day_OffController, GradeController, HourController, ScheduleController};
+use App\Http\Controllers\Admin\{Day_OffController, GradeController, HourController, ScheduleController, SchoolController, UserController};
 use Illuminate\Support\Facades\Route;
 
 Route::get('', AuthController::class);
@@ -54,6 +54,17 @@ Route::group(['middleware' => 'userrole:admin', 'prefix' => 'admin'], function (
     Route::group(['prefix' => 'jadwal-pelajaran'], function(){
         Route::get('', ScheduleController::class)->name('admin.schedule');
         Route::put('update/{schedule:id}', [ScheduleController::class, 'update'])->name('admin.schedule.update');
+    });
+
+    // data sekolah
+    Route::group(['prefix' => 'data-sekolah'], function(){
+        Route::get('', SchoolController::class)->name('admin.data.sekolah');
+        Route::put('update/{school:id}', [SchoolController::class, 'update'])->name('admin.data.sekolah.update');
+    });
+    
+    // data users
+    Route::group(['prefix' => 'data-user'], function(){
+        Route::get('', UserController::class)->name('admin.data.user');
     });
 });
 
