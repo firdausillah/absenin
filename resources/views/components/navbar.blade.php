@@ -11,10 +11,22 @@
                             <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-toggle="dropdown">
                                 <i class="align-middle" data-feather="settings"></i>
                             </a>
-
-                            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
-                                <img src="{{ asset('img/avatars/avatar.jpg') }}" class="avatar img-fluid rounded mr-1" alt="Charles Hall" /> <span class="text-dark">{{ Auth::user()->username }}</span>
-                            </a>
+                            @php
+                                $role = Auth::user()->role;
+                            @endphp
+                            @if ($role == 'admin')
+                                <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
+                                    <img src="{{ Auth::user()->admins->gambar ?? 'https://apollo-singapore.akamaized.net/v1/files/dx2fwvdn0exy1-ID/image;s=272x0' }}" class="avatar img-fluid rounded mr-1" alt="{{ Auth::user()->admins->nama ?? Auth::user()->name }}" /> <span class="text-dark">{{ Auth::user()->admins->nama ?? Auth::user()->name }}</span>
+                                </a>
+                            @elseif($role == 'siswa')
+                                <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
+                                    <img src="{{ asset('img/avatars/avatar.jpg') }}" class="avatar img-fluid rounded mr-1" alt="{{ Auth::user()->students->nama ?? Auth::user()->name }}" /> <span class="text-dark">{{ Auth::user()->students->nama ?? Auth::user()->name }}</span>
+                                </a>
+                            @else
+                                <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
+                                    <img src="{{ asset('img/avatars/avatar.jpg') }}" class="avatar img-fluid rounded mr-1" alt="{{ Auth::user()->guru->nama ?? Auth::user()->name }}" /> <span class="text-dark">{{ Auth::user()->guru->nama ?? Auth::user()->name }}</span>
+                                </a>
+                            @endif
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="pages-profile.html"><i class="align-middle mr-1" data-feather="user"></i> Profile</a>
                                 <a class="dropdown-item" href="#"><i class="align-middle mr-1" data-feather="pie-chart"></i> Analytics</a>
@@ -33,7 +45,7 @@
 
                     <div class="row mb-2 mb-xl-3">
                         <div class="col-auto d-none d-sm-block">
-                            <h3><strong>Absen-In Admin</strong></h3>
+                            <h3><strong>Absen-In {{ $role }}</strong></h3>
                         </div>
                         <div class="col-auto ml-auto text-right mt-n1">
                             <nav aria-label="breadcrumb">

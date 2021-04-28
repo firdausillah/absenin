@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Admin\{Student};
 use Validator;
 
 class AuthController extends Controller
@@ -30,12 +31,18 @@ class AuthController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
-        // dd(Auth::user());
+        // dd(Auth::student());
         if(Auth::attempt(['username'=>$request->username,
         'password'=>$request->password,'status'=>1])){
-            $data = Auth::user();
-            return redirect()->intended(route($data->role.'.dashboard'));
+            $role = Auth::user()->role;
+            return redirect()->intended(route($role . '.dashboard'));
         }else return redirect()->back()->withInput()->withErrors('Username atau password salah. mohon periksa lagi.');
+ 
+        // if(Auth::attempt(['username'=>$request->username,
+        // 'password'=>$request->password,'status'=>1])){
+        //     $data = Auth::user();
+        //     return redirect()->intended(route($data->role.'.dashboard'));
+        // }else return redirect()->back()->withInput()->withErrors('Username atau password salah. mohon periksa lagi.');
  
     }
 

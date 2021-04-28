@@ -65,6 +65,8 @@ Route::group(['middleware' => 'userrole:admin', 'prefix' => 'admin'], function (
     // data users
     Route::group(['prefix' => 'data-user'], function(){
         Route::get('', UserController::class)->name('admin.data.user');
+        Route::get('create', [UserController::class, 'create'])->name('admin.user.create');
+        Route::post('create', [UserController::class, 'save']);
     });
 });
 
