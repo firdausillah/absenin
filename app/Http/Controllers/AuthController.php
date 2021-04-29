@@ -19,7 +19,7 @@ class AuthController extends Controller
     {
         if(Auth::check()){
             $data = Auth::user();
-            return redirect()->intended(route($data->role));
+            return redirect()->intended(route($data->role.'.dashboard'));
         }
         return view('auth/login');
     }

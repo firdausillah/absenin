@@ -67,13 +67,17 @@ Route::group(['middleware' => 'userrole:admin', 'prefix' => 'admin'], function (
         Route::get('', UserController::class)->name('admin.data.user');
         Route::get('create', [UserController::class, 'create'])->name('admin.user.create');
         Route::post('create', [UserController::class, 'save']);
+        Route::get('edit/{user:username}', [UserController::class, 'edit'])->name('admin.data.user.edit');
+        Route::put('edit/{user:username}', [UserController::class, 'update']);
+        Route::get('delete/{user:username}', [UserController::class, 'destroy'])->name('admin.data.user.delete');
+        Route::delete('delete-users}', [UserController::class, 'deleteAll'])->name('admin.data.user.delete.all');
     });
 });
 
 Route::group(['middleware' => 'userrole:guru', 'prefix' => 'guru'], function () {
-    Route::get('/dashboard', function () {
+    Route::get('dashboard', function () {
         return view('dashboard');
-    })->name('guru');
+    })->name('guru.dashboard');
 });
 
 Route::group(['middleware' => 'userrole:siswa', 'prefix' => 'siswa'], function () {

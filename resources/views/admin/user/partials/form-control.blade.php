@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="mb-3 col-md-6">
                             <label class="form-label" for="inputUsername">Username</label>
-                            <input type="text" name="username" value="{{ old('username') ?? $user->username }}" class="form-control" id="inputUsername" placeholder="Username">
+                            <input type="text" name="username" value="{{ old('username') ?? $user->username }}" class="form-control" id="inputUsername" placeholder="Username" pattern="[a-zA-Z0-9]+" required oninvalid="this.setCustomValidity('Input hanya boleh huruf a-z tanpa spasi!')">
                             @error('username')
                                 <div class="mt-2 text-danger">{{ $message }}</div>
                             @enderror

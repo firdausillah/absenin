@@ -16,7 +16,7 @@
                 <h5 class="card-title"><strong>Form Data User</strong></h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.user.edit', $user) }}" method="POST">
+                <form action="{{ route('admin.data.user.edit', $user) }}" method="POST">
                     @csrf
                     @method('put')
                     @include('admin.user.partials.form-control')
