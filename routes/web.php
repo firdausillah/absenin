@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\{AuthController, DashboardController, HomeController};
-use App\Http\Controllers\Admin\{Day_OffController, GradeController, HourController, ScheduleController, SchoolController, UserController};
+use App\Http\Controllers\Admin\{Day_OffController, GradeController, TeacherController, HourController, ScheduleController, SchoolController, UserController};
 use Illuminate\Support\Facades\Route;
 
 Route::get('', AuthController::class);
@@ -71,6 +71,12 @@ Route::group(['middleware' => 'userrole:admin', 'prefix' => 'admin'], function (
         Route::put('edit/{user:username}', [UserController::class, 'update']);
         Route::get('delete/{user:username}', [UserController::class, 'destroy'])->name('admin.data.user.delete');
         Route::delete('delete-users}', [UserController::class, 'deleteAll'])->name('admin.data.user.delete.all');
+    });
+
+    // data guru
+    Route::group(['prefix' => 'data-guru'], function(){
+        Route::get('', TeacherController::class)->name('admin.data.guru');
+        Route::get('edit/{teacher:username}', [TeacherController::class, 'edit'])->name('admin.data.teacher.edit');
     });
 });
 

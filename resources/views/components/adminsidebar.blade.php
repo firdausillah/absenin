@@ -27,8 +27,8 @@
                     <li class="sidebar-item{{ $seg == "data-sekolah" ? ' active' : '' }}"><a class="sidebar-link" href="{{ route('admin.data.sekolah') }}">Data Sekolah</a></li>
                 </ul>
             </li>
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="data-guru.php">
+            <li class="sidebar-item{{ $seg == 'data-guru' ? ' active' : '' }}">
+                <a class="sidebar-link" href="{{ route('admin.data.guru') }}">
                     <i class="align-middle" data-feather="users"></i> <span class="align-middle">Data Guru</span>
                 </a>
             </li>
