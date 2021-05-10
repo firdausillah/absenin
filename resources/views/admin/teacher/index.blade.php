@@ -37,7 +37,7 @@
                         {{-- @dd($teachers) --}}
                         @foreach ($teachers as $teacher)
                         <tr>
-                            <td><a href="data-guru-detail.php" style="color:#495057">{{ $teacher->nama }}</a></td>
+                            <td><a href="data-guru-detail.php" style="color:#495057">{{ $teacher->name }}</a></td>
                             <td><img src="{{ asset($teacher->gambar) }}" height="60px" alt="{{ asset($teacher->gambar) }}"></td>
                             <td>{{ $teacher->nama_kelas }}</td>
                             <td>
