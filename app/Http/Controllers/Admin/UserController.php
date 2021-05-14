@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\UserImport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use Session;
 
 class UserController extends Controller
 {
@@ -88,5 +91,28 @@ class UserController extends Controller
         $ids = $request->ids;
         User::whereIn('id', $ids)->delete();
         return response()->json(['success'=>"user berhasil di hapus"]);
+    }
+
+    public function importUser(Request $request)
+    {
+        // validasi
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+
+        // menangkap file excel
+        $file = $request->file('file');
+
+        // membuat nama file unik
+        $nama_file = rand() . $file->getClientOriginalName();
+
+        // upload ke folder file_user di dalam folder public
+        $file->move('file_user', $nama_file);
+
+        // import data
+        Excel::import(new UserImport, public_path('/file_user/' . $nama_file));
+
+        // notifikasi dengan session
+        return redirect()->route('admin.data.user')->with('success', 'User berhasil diimport');
     }
 }

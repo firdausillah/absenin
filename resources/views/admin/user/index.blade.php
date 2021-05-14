@@ -15,12 +15,12 @@
                     </div>
                     <div class="col-8">
                         <div class="text-right d-none d-lg-block">
-                            <a href="#" class="btn btn-success"><i class="align-middle mr-2" data-feather="upload"></i>Import</a>
+                            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#importExcel"><i class="align-middle mr-2" data-feather="upload"></i>Import</a>
                             <a href="{{ route('admin.user.create') }}" class="btn btn-primary"><i class="align-middle mr-2" data-feather="plus-square"></i>Tambah Data</a>
                             <a href="#" class="btn btn-danger" id="deleteAll"><i class="align-middle mr-2" data-feather="delete"></i>Hapus</a>
                         </div>
                         <div class="text-right d-block d-lg-none">
-                            <a href="#" class="btn btn-success btn-sm"><i class="align-middle" data-feather="upload"></i></a>
+                            <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#importExcel"><i class="align-middle" data-feather="upload"></i></a>
                             <a href="{{ route('admin.user.create') }}" class="btn btn-primary btn-sm"><i class="align-middle" data-feather="plus-square"></i></a>
                             <a href="#" class="btn btn-danger btn-sm" id="deleteAll"><i class="align-middle" data-feather="delete"></i></a>
                         </div>
@@ -46,7 +46,11 @@
                             <td>{{ $user['name'] }}</td>
                             <td>{{ $user['username'] }}</td>
                             <td>{{ $user['role'] }}</td>
-                            <td>{{ $user['status'] == '1' ? 'Aktif' : 'Nonaktif' }}</td>
+                            <td>
+                                <div class="form-check form-switch text-center">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" {{ $user['status'] == '1' ? 'checked' : '' }}>
+                                </div>
+                            </td>
                             <td>
                                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Aksi
@@ -65,6 +69,35 @@
     </div>
 </div>
 <!-- end Content -->
+
+{{-- modal open --}}
+	<!-- Import Excel -->
+	<div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<form method="post" action="{{ route('admin.data.user.import') }}" enctype="multipart/form-data">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
+					</div>
+					<div class="modal-body">
+ 
+						{{ csrf_field() }}
+ 
+						<label>Pilih file excel</label>
+						<div class="form-group">
+							<input type="file" name="file" required="required">
+						</div>
+ 
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Import</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+{{-- modal close --}}
 @endsection
 @push('js')
 

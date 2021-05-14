@@ -28,8 +28,9 @@
                             @enderror
                         </div>
                         <div class="mb-3 col-md-6">
-                            <label class="form-label" for="inputPassword4">Password</label>
-                            <input type="password" name="password" value="{{ old('password') ?? $user->password }}" class="form-control" id="inputPassword4" placeholder="Password">
+                            <label class="form-label" for="inputPassword">Password</label>
+                            <a href="#" onclick="defaultPasword()" class="badge bg-danger" data-toggle="tooltip" data-placement="bottom" title="Default : 123">Default</a>
+                            <input type="password" name="password" value="{{ old('password') ?? $user->password }}" class="form-control" id="inputPassword" placeholder="Password">
                             @error('password')
                                 <div class="mt-2 text-danger">{{ $message }}</div>
                             @enderror
@@ -37,3 +38,11 @@
                     </div>
                     <button type="submit" class="btn btn-primary">{{ $submit }}</button>
                     <a href="{{ route('admin.data.user') }}" class="btn btn-success">Kembali</a>
+
+                    @push('js')
+                        <script>
+                            function defaultPasword() {
+                            document.getElementById("inputPassword").value = "123";
+                            }
+                        </script>
+                    @endpush
