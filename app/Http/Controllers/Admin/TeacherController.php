@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Admin\{Teacher, User};
+use App\Models\Admin\Teacher;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 class TeacherController extends Controller
@@ -30,7 +31,16 @@ class TeacherController extends Controller
         // dd($teacher);
         return view('admin/teacher/edit', [
             'teacher' =>User::leftjoin('teachers', 'teachers.user_id', '=', 'users.id')
+            ->Where('users.username', $teacher)
+            ->first()
+        ]);
+    }
+    public function detail($teacher){
+        // dd($teacher);
+        return view('admin/teacher/detail', [
+            'teacher' =>User::leftjoin('teachers', 'teachers.user_id', '=', 'users.id')
             ->leftjoin('homerooms', 'homerooms.teacher_id', '=', 'teachers.id')
+            ->leftjoin('grades', 'grades.id', '=', 'homerooms.grade_id')
             ->Where('users.username', $teacher)
             ->first()
         ]);
@@ -70,7 +80,7 @@ class TeacherController extends Controller
 
             if (request('gambar')) {
                 Storage::delete($teacher_by_id->image);
-                $image = request()->file('image')->store('images/teachers');
+                $image = request()->file('gambar')->store('images/teachers');
             } elseif ($teacher_by_id->image) {
                 $image = $teacher_by_id->image;
             } else {
@@ -80,7 +90,6 @@ class TeacherController extends Controller
             $teacher_by_id->update([
                 'user_id' => $teacher->id,
                 'induk' => request('induk'),
-                'role' => request('role'),
                 'mapel' => request('mapel'),
                 'no_hp' => request('no_hp'),
                 'alamat' => request('alamat'),

@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\{AuthController, DashboardController, HomeController};
-use App\Http\Controllers\Admin\{Day_OffController, GradeController, TeacherController, HourController, ScheduleController, SchoolController, UserController};
+use App\Http\Controllers\Admin\{Day_OffController, GradeController, TeacherController, HourController, ScheduleController, SchoolController, UserController, StudentController};
 use Illuminate\Support\Facades\Route;
 
 Route::get('', AuthController::class);
@@ -77,8 +77,17 @@ Route::group(['middleware' => 'userrole:admin', 'prefix' => 'admin'], function (
     // data guru
     Route::group(['prefix' => 'data-guru'], function(){
         Route::get('', TeacherController::class)->name('admin.data.guru');
+        Route::get('detail/{teacher:username}', [TeacherController::class, 'detail'])->name('admin.data.teacher.detail');
         Route::get('edit/{teacher:username}', [TeacherController::class, 'edit'])->name('admin.data.teacher.edit');
         Route::put('edit/{teacher:username}', [TeacherController::class, 'update']);
+    });
+
+    // data siswa
+    Route::group(['prefix' => 'data-siswa'], function(){
+        Route::get('', StudentController::class)->name('admin.data.student');
+        Route::get('detail/{student:username}', [StudentController::class, 'detail'])->name('admin.data.student.detail');
+        Route::get('edit/{student:username}', [StudentController::class, 'edit'])->name('admin.data.student.edit');
+        Route::put('edit/{student:username}', [StudentController::class, 'update']);
     });
 });
 

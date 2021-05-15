@@ -60,7 +60,7 @@
                             @enderror
                         </div>
                         <div class="mb-3 col-md-6">
-                            <label class="form-label" for="inputTelfon4">Nomor Telfon</label>
+                            <label class="form-label" for="inputTelfon4">Nomor Telpon</label>
                             <input type="number" name="no_hp" value="{{ $teacher->no_hp }}" class="form-control" id="inputTelfon4" placeholder="Nomor Telfon">
                             @error('no_hp')
                                 <div class="mt-2 text-danger">{{ $message }}</div>
@@ -77,16 +77,17 @@
                     <div class="row">
                         <div class="mb-3 col-md-6">
                             <label class="form-label" for="inputGambar">Gambar</label>
-                            <input type="file" name="gambar" value="{{ $teacher->gambar }}" class="form-control" id="inputGambar">
+                            <input type="file" name="gambar" class="form-control" id="inputGambar">
                             @error('gambar')
                                 <div class="mt-2 text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3 col-md-6">
+                            <a href="{{ asset('storage/'.$teacher->gambar) }}"> <img src="{{ asset('storage/'.$teacher->gambar) }}" height="100px" alt="{{ asset('storage/'.$teacher->gambar) }}"> </a>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <a href="data-guru.php" class="btn btn-success">Kembali</a>
+                    <a href="{{ route('admin.data.guru') }}" class="btn btn-success">Kembali</a>
                 </form>
             </div>
         </div>
