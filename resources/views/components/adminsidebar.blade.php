@@ -32,8 +32,8 @@
                     <i class="align-middle" data-feather="users"></i> <span class="align-middle">Data Guru</span>
                 </a>
             </li>
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="data-siswa.php">
+            <li class="sidebar-item{{ $seg == 'data-siswa' ? ' active' : '' }}">
+                <a class="sidebar-link" href="{{ route('admin.data.student') }}">
                     <i class="align-middle" data-feather="users"></i> <span class="align-middle">Data Siswa</span>
                 </a>
             <li class="sidebar-item{{ $seg == 'data-user' ? ' active' : '' }}">

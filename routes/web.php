@@ -92,9 +92,7 @@ Route::group(['middleware' => 'userrole:admin', 'prefix' => 'admin'], function (
 });
 
 Route::group(['middleware' => 'userrole:guru', 'prefix' => 'guru'], function () {
-    Route::get('dashboard', function () {
-        return view('dashboard');
-    })->name('guru.dashboard');
+    Route::get('dashboard', [DashboardController::class, 'admin'])->name('admin.dashboard');
 });
 
 Route::group(['middleware' => 'userrole:siswa', 'prefix' => 'siswa'], function () {

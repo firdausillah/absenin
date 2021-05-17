@@ -1,6 +1,6 @@
 @extends('layouts.adminapp')
 
-@section('title', 'Data Guru')
+@section('title', 'Data Siswa')
 
 @section('content')
 <!-- Content -->
