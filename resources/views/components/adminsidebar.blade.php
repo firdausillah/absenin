@@ -14,22 +14,28 @@
                     <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                 </a>
             </li>
-            <li class="sidebar-item{{ $seg == 'kelas' or $seg == "jam-absen-guru" or $seg == "daftar-hari-libur" or $seg == "jam-absen-siswa" or $seg == "jadwal-pelajaran" or $seg == "data-sekolah" ? ' active' : '' }}">
+            <li class="sidebar-item{{ $seg == 'kelas' or $seg == "jam-absen-guru" or $seg == "daftar-hari-libur" or $seg == "jam-absen-siswa" or $seg == "jadwal-pelajaran" or $seg == "semester" or $seg == "data-sekolah" ? ' active' : '' }}">
                 <a data-target="#ui" data-toggle="collapse" class="sidebar-link collapsed" aria-expanded="false">
                     <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Master Data</span>
                 </a>
-                <ul id="ui" class="sidebar-dropdown list-unstyled collapse{{ $seg == 'kelas' or $seg == "jam-absen-guru" or $seg == "jam-absen-siswa" or $seg == "jadwal-pelajaran" or $seg == "data-sekolah" or $seg == "daftar-hari-libur" ? ' show' : '' }}" data-parent="#sidebar" style="">
+                <ul id="ui" class="sidebar-dropdown list-unstyled collapse{{ $seg == 'kelas' or $seg == "jam-absen-guru" or $seg == "jam-absen-siswa" or $seg == "jadwal-pelajaran" or $seg == "semester" or $seg == "data-sekolah" or $seg == "daftar-hari-libur" ? ' show' : '' }}" data-parent="#sidebar" style="">
                     <li class="sidebar-item{{ $seg == 'kelas' ? ' active' : '' }}"><a class="sidebar-link" href="{{ route('admin.grade') }}">Kelas</a></li>
                     <li class="sidebar-item{{ $seg == "jam-absen-guru" ? ' active' : '' }}"><a class="sidebar-link" href="{{ route('admin.hour.guru') }}">Jam Absen Guru</a></li>
                     <li class="sidebar-item{{ $seg == "jam-absen-siswa" ? ' active' : '' }}"><a class="sidebar-link" href="{{ route('admin.hour.siswa') }}">Jam Absen Siswa</a></li>
                     <li class="sidebar-item{{ $seg == "daftar-hari-libur" ? ' active' : '' }}"><a class="sidebar-link" href="{{ route('admin.dayOff') }}">Daftar Hari Libur</a></li>
                     <li class="sidebar-item{{ $seg == "jadwal-pelajaran" ? ' active' : '' }}"><a class="sidebar-link" href="{{ route('admin.schedule') }}">Jadwal Pelajaran</a></li>
+                    <li class="sidebar-item{{ $seg == "semester" ? ' active' : '' }}"><a class="sidebar-link" href="{{ route('admin.semester') }}">Semester</a></li>
                     <li class="sidebar-item{{ $seg == "data-sekolah" ? ' active' : '' }}"><a class="sidebar-link" href="{{ route('admin.data.sekolah') }}">Data Sekolah</a></li>
                 </ul>
             </li>
             <li class="sidebar-item{{ $seg == 'data-guru' ? ' active' : '' }}">
                 <a class="sidebar-link" href="{{ route('admin.data.guru') }}">
                     <i class="align-middle" data-feather="users"></i> <span class="align-middle">Data Guru</span>
+                </a>
+            </li>
+            <li class="sidebar-item{{ $seg == 'data-wali-kelas' ? ' active' : '' }}">
+                <a class="sidebar-link" href="{{ route('admin.data.homeroom') }}">
+                    <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Data Walikelas</span>
                 </a>
             </li>
             <li class="sidebar-item{{ $seg == 'data-siswa' ? ' active' : '' }}">

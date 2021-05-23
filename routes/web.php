@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\{AuthController, DashboardController, HomeController};
-use App\Http\Controllers\Admin\{Day_OffController, GradeController, TeacherController, HourController, ScheduleController, SchoolController, UserController, StudentController};
+use App\Http\Controllers\Admin\{Day_OffController, GradeController, TeacherController, HourController, ScheduleController, SchoolController, SemesterController, UserController, StudentController};
 use Illuminate\Support\Facades\Route;
 
 Route::get('', AuthController::class);
@@ -56,6 +56,16 @@ Route::group(['middleware' => 'userrole:admin', 'prefix' => 'admin'], function (
         Route::put('update/{schedule:id}', [ScheduleController::class, 'update'])->name('admin.schedule.update');
     });
 
+    // Semester
+    Route::group(['prefix' => 'semester'], function(){
+        Route::get('', SemesterController::class)->name('admin.semester');
+        Route::get('create', [SemesterController::class, 'create'])->name('admin.semester.create');
+        Route::post('create', [SemesterController::class, 'save']);
+        Route::get('edit/{semester:id}', [SemesterController::class, 'edit'])->name('admin.semester.edit');
+        Route::put('edit/{semester:id}', [SemesterController::class, 'update']);
+        Route::get('delete/{semester:id}', [SemesterController::class, 'destroy'])->name('admin.semester.delete');
+    });
+
     // data sekolah
     Route::group(['prefix' => 'data-sekolah'], function(){
         Route::get('', SchoolController::class)->name('admin.data.sekolah');
@@ -80,6 +90,11 @@ Route::group(['middleware' => 'userrole:admin', 'prefix' => 'admin'], function (
         Route::get('detail/{teacher:username}', [TeacherController::class, 'detail'])->name('admin.data.teacher.detail');
         Route::get('edit/{teacher:username}', [TeacherController::class, 'edit'])->name('admin.data.teacher.edit');
         Route::put('edit/{teacher:username}', [TeacherController::class, 'update']);
+    });
+
+    // data guru
+    Route::group(['prefix' => 'data-wali-kelas'], function(){
+        Route::get('', TeacherController::class)->name('admin.data.homeroom');
     });
 
     // data siswa

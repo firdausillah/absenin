@@ -1,6 +1,6 @@
 @extends('layouts.adminapp')
 
-@section('title', 'Data Guru')
+@section('title', 'Semester')
 
 @section('content')
 <!-- Content -->
@@ -11,14 +11,14 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-4">
-                        <h4>Data Guru</h4>
+                        <h4>Data Kelas</h4>
                     </div>
                     <div class="col-8">
                         <div class="text-right d-none d-lg-block">
-                            <a href="#" class="btn btn-success"><i class="align-middle mr-2" data-feather="printer"></i>Print</a>
+                            <a href="{{ route('admin.semester.create') }}" class="btn btn-primary"><i class="align-middle mr-2" data-feather="plus-square"></i>Tambah Data</a>
                         </div>
                         <div class="text-right d-block d-lg-none">
-                            <a href="#" class="btn btn-success btn-sm"><i class="align-middle" data-feather="printer"></i></a>
+                            <a href="{{ route('admin.semester.create') }}" class="btn btn-primary btn-sm"><i class="align-middle" data-feather="plus-square"></i></a>
                         </div>
                     </div>
                 </div>
@@ -27,27 +27,23 @@
                 <table class="table mb-0 table-hover" id="example1">
                     <thead>
                         <tr>
-                            <th scope="col">Nomor Induk</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">Gambar</th>
+                            <th scope="col">Tahun Pelajaran</th>
+                            <th scope="col">Semester</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @dd($teachers) --}}
-                        @foreach ($teachers as $teacher)
+                        @foreach($semesters as $semester)
                         <tr>
-                            <td>{{ $teacher->induk }}</td>
-                            <td><a href="{{ route('admin.data.teacher.detail', $teacher) }}" style="color:#495057">{{ $teacher->name }}</a></td>
-                            <td><img src="{{ asset('storage/'.$teacher->gambar) }}" height="60px" alt="{{ asset('storage/'.$teacher->gambar) }}"></td>
+                            <td>{{ $semester['tahun_pelajaran'] }}</td>
+                            <td>{{ $semester['semester'] }}</td>
                             <td>
                                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Aksi
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ route('admin.data.teacher.detail', $teacher) }}"><i class="align-middle mr-2" data-feather="eye"></i> Detail</a>
-                                    <a class="dropdown-item" href="{{ route('admin.data.teacher.edit', $teacher) }}"><i class="align-middle mr-2" data-feather="edit"></i> Edit</a>
-                                    <a class="dropdown-item" onclick='Hapus()' href="#"><i class="align-middle mr-2" data-feather="delete"></i> Hapus</a>
+                                    <a class="dropdown-item" href="{{ route('admin.semester.edit', $semester) }}"><i class="align-middle mr-2" data-feather="edit"></i> Edit</a>
+                                    <a href="{{ route('admin.semester.delete', $semester) }}" class="dropdown-item" onclick="return Hapus();" ><i class="align-middle mr-2" data-feather="delete"></i> Hapus</a>
                                 </div>
                             </td>
                         </tr>
@@ -61,6 +57,7 @@
 <!-- end Content -->
 @endsection
 @push('js')
+
     <script>
         function Hapus(){
             return confirm('Apakah anda yakin ingin menghapus data ini ?');
