@@ -42,7 +42,7 @@
                     @push('js')
                         <script>
                             function defaultPasword() {
-                            document.getElementById("inputPassword").value = "123";
+                                document.getElementById("inputPassword").innerHTML = "123";
                             }
                         </script>
                     @endpush

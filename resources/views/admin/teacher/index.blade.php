@@ -29,8 +29,7 @@
                         <tr>
                             <th scope="col">Nomor Induk</th>
                             <th scope="col">Nama</th>
-                            <th scope="col">Gambar</th>
-                            <th scope="col">Wali Kelas</th>
+                            <th scope="col">Gambar</th
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
