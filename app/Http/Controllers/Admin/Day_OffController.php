@@ -61,6 +61,7 @@ class Day_OffController extends Controller
             'tanggal' => 'required',
             'keterangan' => 'required'
         ]);
+        // dd(request());
 
         $dayOff->update([
             'tanggal' => request('tanggal'),

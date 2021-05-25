@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\{AuthController, DashboardController, HomeController};
-use App\Http\Controllers\Admin\{Day_OffController, GradeController, TeacherController, HourController, ScheduleController, SchoolController, SemesterController, UserController, StudentController};
+use App\Http\Controllers\Admin\{Day_OffController, GradeController, HomeroomController, TeacherController, HourController, ScheduleController, SchoolController, SemesterController, UserController, StudentController};
 use Illuminate\Support\Facades\Route;
 
 Route::get('', AuthController::class);
@@ -92,9 +92,15 @@ Route::group(['middleware' => 'userrole:admin', 'prefix' => 'admin'], function (
         Route::put('edit/{teacher:username}', [TeacherController::class, 'update']);
     });
 
-    // data guru
+    // data wali kelas
     Route::group(['prefix' => 'data-wali-kelas'], function(){
-        Route::get('', TeacherController::class)->name('admin.data.homeroom');
+        Route::get('', HomeroomController::class)->name('admin.data.homeroom');
+        Route::get('create', [HomeroomController::class, 'create'])->name('admin.homeroom.create');
+        Route::post('create', [HomeroomController::class, 'save']);
+        Route::post('search', [HomeroomController::class, 'search'])->name('admin.homeroom.search');
+        Route::get('edit/{homeroom:id}', [HomeroomController::class, 'edit'])->name('admin.homeroom.edit');
+        Route::put('edit/{homeroom:id}', [HomeroomController::class, 'update']);
+        Route::get('delete/{homeroom:id}', [HomeroomController::class, 'destroy'])->name('admin.homeroom.delete');
     });
 
     // data siswa
@@ -107,7 +113,7 @@ Route::group(['middleware' => 'userrole:admin', 'prefix' => 'admin'], function (
 });
 
 Route::group(['middleware' => 'userrole:guru', 'prefix' => 'guru'], function () {
-    Route::get('dashboard', [DashboardController::class, 'admin'])->name('admin.dashboard');
+    Route::get('dashboard', [DashboardController::class, 'guru'])->name('guru.dashboard');
 });
 
 Route::group(['middleware' => 'userrole:siswa', 'prefix' => 'siswa'], function () {

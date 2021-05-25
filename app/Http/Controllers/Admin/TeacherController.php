@@ -20,7 +20,7 @@ class TeacherController extends Controller
     {
         return view('admin/teacher/index', [
             'teachers' => User::leftjoin('teachers', 'teachers.user_id', '=', 'users.id')
-                ->leftjoin('homerooms', 'homerooms.teacher_id', '=', 'teachers.id')
+                ->leftjoin('homerooms', 'homerooms.user_id', '=', 'users.id')
                 ->leftjoin('grades', 'grades.id', '=', 'homerooms.grade_id')
                 ->where('role', 'guru')
                 ->get()
