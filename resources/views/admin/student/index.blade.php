@@ -27,9 +27,9 @@
                 <table class="table mb-0" id="example1">
                     <thead>
                         <tr>
+                            <th scope="col">Nomor Induk</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Gambar</th>
-                            <th scope="col">Kelas</th>
                             <th scope="col">Username</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -37,9 +37,9 @@
                     <tbody>
                         @foreach ($students as $student)
                         <tr>
+                            <td>{{ $student->induk }}</td>
                             <td><a href="data-siswa-detail.php" style="color:#495057">{{ $student->name }}</a></td>
                             <td><img src="{{ asset('storage/'.$student->gambar) }}" height="70px" alt="{{ asset('storage/'.$student->gambar) }}"></td>
-                            <td>X Multimedia</td>
                             <td>{{ $student->username }}</td>
                             <td>
                                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,7 +47,7 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="data-siswa-detail.php"><i class="align-middle mr-2" data-feather="eye"></i> Detail</a>
-                                    <a class="dropdown-item" href="data-siswa-form.php"><i class="align-middle mr-2" data-feather="edit"></i> Edit</a>
+                                    <a class="dropdown-item" href="{{ route('admin.data.student.edit', $student) }}"><i class="align-middle mr-2" data-feather="edit"></i> Edit</a>
                                     <a class="dropdown-item" onclick='Hapus()' href="#"><i class="align-middle mr-2" data-feather="delete"></i> Hapus</a>
                                 </div>
                             </td>

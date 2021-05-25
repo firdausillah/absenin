@@ -20,8 +20,6 @@ class TeacherController extends Controller
     {
         return view('admin/teacher/index', [
             'teachers' => User::leftjoin('teachers', 'teachers.user_id', '=', 'users.id')
-                ->leftjoin('homerooms', 'homerooms.user_id', '=', 'users.id')
-                ->leftjoin('grades', 'grades.id', '=', 'homerooms.grade_id')
                 ->where('role', 'guru')
                 ->get()
         ]);
@@ -39,7 +37,7 @@ class TeacherController extends Controller
         // dd($teacher);
         return view('admin/teacher/detail', [
             'teacher' =>User::leftjoin('teachers', 'teachers.user_id', '=', 'users.id')
-            ->leftjoin('homerooms', 'homerooms.teacher_id', '=', 'teachers.id')
+            ->leftjoin('homerooms', 'homerooms.user_id', '=', 'users.id')
             ->leftjoin('grades', 'grades.id', '=', 'homerooms.grade_id')
             ->Where('users.username', $teacher)
             ->first()
@@ -47,9 +45,10 @@ class TeacherController extends Controller
     }
 
     public function update(User $teacher){
+        $user = User::where('id', $teacher->id)->first();
         request()->validate([
             'name' => 'required',
-            'username' => 'required',
+            'username' => 'required|unique:Users,username,' . $user->id,
             'induk' => 'required',
             'mapel' => 'required',
             'no_hp' => 'required',
@@ -59,8 +58,7 @@ class TeacherController extends Controller
 
         $teacher_by_id = Teacher::where('user_id', $teacher->id)->first();
         $teachers_user_id = Teacher::select('user_id')->where('user_id', $teacher->id)->first();
-        $user = User::where('id', $teacher->id)->first();
-        // dd($teachers_user_id);
+        // dd($teacher_by_id);
         if($teachers_user_id == null){
             Teacher::create([
                 'user_id' => $teacher->id,
@@ -77,12 +75,13 @@ class TeacherController extends Controller
                 'name' => request('name'),
                 'username' => request('username'),
             ]);
+            // dd(new $user);
 
             if (request('gambar')) {
-                Storage::delete($teacher_by_id->image);
+                Storage::delete($teacher_by_id->gambar);
                 $image = request()->file('gambar')->store('images/teachers');
-            } elseif ($teacher_by_id->image) {
-                $image = $teacher_by_id->image;
+            } elseif ($teacher_by_id->gambar) {
+                $image = $teacher_by_id->gambar;
             } else {
                 $image = null;
             }

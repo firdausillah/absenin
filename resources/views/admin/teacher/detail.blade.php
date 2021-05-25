@@ -15,7 +15,7 @@
                 <h5 class="card-title mb-0">Profile</h5>
             </div>
             <div class="card-body text-center">
-                <img src="{{ asset('storage/'.$teacher->gambar) }}" alt="{{ $teacher->name }}" class="img-fluid rounded-circle mb-2" width="128" height="128">
+                <img src="{{ asset('storage/'.$teacher->gambar) }}" alt="{{ $teacher->name }}" width="90" height="90" class="rounded-circle mb-2" width="128" height="128">
                 <h5 class="card-title mb-0">{{ $teacher->name }}</h5>
                 <div class="text-muted">{{ $teacher->induk }}</div>
                 <div class="card-title mb-0">{{ $teacher->nama_kelas }}</div>
